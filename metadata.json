@@ -1,0 +1,8 @@
+{
+  "name": "Fullscreen Button",
+  "description": "A button in the status bar to expand current window to fullscreen. Useful for tablets.",
+  "uuid": "fullscreen-button@domgregori.github.com",
+  "shell-version": [
+    "46"
+  ]
+}
