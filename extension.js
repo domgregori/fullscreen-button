@@ -1,6 +1,4 @@
-import GObject from 'gi://GObject';
 import St from 'gi://St';
-import Meta from 'gi://Meta';
 
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
