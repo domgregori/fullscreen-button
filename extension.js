@@ -20,16 +20,24 @@ export default class FullscreenButtonExtension extends Extension {
         this._indicator.add_child(icon);
 
         Main.panel.addToStatusArea(this.uuid, this._indicator);
-        this._indicator.connect('touch-event', this._buttonActivated);
-        this._indicator.connect('button-press-event', this._buttonActivated);
+        this._tapHandler = this._indicator.connect('touch-event', this._buttonActivated);
+        this._clickHandler = this._indicator.connect('button-press-event', this._buttonActivated);
     }
 
     disable() {
+        if (this._tapHandler) {
+            this._indicator.disconnect(this._tapHandler);
+            this._tapHandler = null;
+        }
+        if (this._clickHandler) {
+            this._indicator.disconnect(this._clickHandler);
+            this._clickHandler = null;
+        }
         this._indicator?.destroy();
         this._indicator = null;
     }
 
-    _buttonActivated(actor, event) {
+    _buttonActivated() {
         let activeWindow = global.display.focus_window;
         if (activeWindow) {
             activeWindow.make_fullscreen();
