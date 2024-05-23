@@ -1,5 +1,6 @@
 const Gettext = imports.gettext;
 const St = imports.gi.St;
+const Gio = imports.gi.Gio;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
@@ -20,9 +21,9 @@ class Extension {
 
       // Add an icon
       const icon = new St.Icon({
-          icon_name: 'view-fullscreen-symbolic',
           style_class: 'system-status-icon',
       });
+      icon.gicon = Gio.icon_new_for_string(Me.path + '/icons/fullscreen.svg');
       this._indicator.add_child(icon);
 
       Main.panel.addToStatusArea(Me.metadata.uuid, this._indicator);
