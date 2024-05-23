@@ -38,7 +38,11 @@ export default class FullscreenButtonExtension extends Extension {
     _buttonActivated() {
         let activeWindow = global.display.focus_window;
         if (activeWindow) {
-            activeWindow.make_fullscreen();
+            if (activeWindow.is_fullscreen()) {
+                activeWindow.unmake_fullscreen();
+            } else {
+                activeWindow.make_fullscreen();
+            }
         }
     }
     
