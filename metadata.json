@@ -3,8 +3,11 @@
   "description": "A button in the status bar to expand current window to fullscreen. Useful for tablets.",
   "uuid": "fullscreen-button@domgregori.github.com",
   "shell-version": [
-    "45",
-    "46"
+    "41",
+    "42",
+    "43",
+    "44"
   ],
-  "url": "https://github.com/domgregori/fullscreen-button"
+  "url": "https://github.com/domgregori/fullscreen-button",
+  "version": 1
 }
