@@ -48,7 +48,11 @@ class Extension {
   _buttonActivated() {
     let activeWindow = global.display.focus_window;
     if (activeWindow) {
+      if (activeWindow.is_fullscreen()) {
+        activeWindow.unmake_fullscreen();
+      } else {
         activeWindow.make_fullscreen();
+      }
     }
   }
 }
