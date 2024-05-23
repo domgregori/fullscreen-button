@@ -1,4 +1,5 @@
 import St from 'gi://St';
+import Gio from 'gi://Gio';
 
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
@@ -12,9 +13,9 @@ export default class FullscreenButtonExtension extends Extension {
     enable() {
         this._indicator = new PanelMenu.Button(0.0, this.metadata.name, false);
         const icon = new St.Icon({
-            icon_name: 'view-fullscreen-symbolic',
             style_class: 'system-status-icon',
         });
+        icon.gicon = Gio.icon_new_for_string(this.path + '/icons/fullscreen.svg');
         this._indicator.add_child(icon);
 
         Main.panel.addToStatusArea(this.uuid, this._indicator);
