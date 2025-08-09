@@ -1,0 +1,30 @@
+{
+  "name": "fullscreen-button",
+  "version": "8.0.0",
+  "description": "A button in status bar to quickly toggle fullscreen for focused app",
+  "type": "module",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:domgregori/fullscreen-button.git"
+  },
+  "author": "domgregori",
+  "license": "LGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/domgregori/fullscreen-button/issues"
+  },
+  "homepage": "https://github.com/domgregori/fullscreen-button#",
+  "sideEffects": false,
+  "devDependencies": {
+    "eslint": "^9.33.0",
+    "eslint-plugin-jsdoc": "^52.0.4",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@girs/gjs": "^4.0.0-beta.25",
+    "@girs/gnome-shell": "^48.0.2"
+  },
+  "overrides": {
+    "@girs/gio-2.0": "2.84.0-4.0.0-beta.23"
+  }
+}
