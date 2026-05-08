@@ -1,7 +1,7 @@
 NAME=fullscreen-button
 DOMAIN=domgregori.github.com
 
-.PHONY: all pack install clean cleanall
+.PHONY: all pack errortest install debug uplaod clean cleanall
 
 all: dist/extension.js
 
@@ -9,7 +9,7 @@ node_modules: package.json
 	npm install
 
 dist/extension.js: node_modules
-	tsc
+	@(tsc || { echo "typescript not installed" >&2; exit 1; })
 
 $(NAME).zip: dist/extension.js
 	@cp metadata.json dist/
@@ -18,10 +18,24 @@ $(NAME).zip: dist/extension.js
 
 pack: $(NAME).zip
 
+errortest: pack
+	uvx shexli $(NAME).zip
+
 install: $(NAME).zip
 	@touch ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)
 	@rm -rf ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)
 	@mv dist ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)
+
+installfromzip: $(NAME).zip
+	@gnome-extensions install $(NAME).zip --force
+	@gnome-extensions enable $(NAME)@$(DOMAIN)
+
+debug: $(NAME).zip install
+	@([ -f /usr/lib/mutter-devkit ] || { echo "mutter-devkit not installed" >&2; exit 1; })
+	GSETTINGS_BACKEND=memory dbus-run-session -- gnome-shell --devkit 'gnome-shell-test-tool --extension $(NAME).zip dist/extension.js'
+
+upload: $(NAME).zip errortest
+	gnome-extensions upload --accept-tos -u domgregori $(NAME).zip
 
 clean:
 	@rm -rf dist $(NAME).zip
