@@ -20,7 +20,7 @@ export default class FullscreenButtonExtension extends Extension {
     }
 
     enable() {
-        this._indicator = new PanelMenu.Button(0.0, this.metadata.name, false);
+        this._indicator = new PanelMenu.Button(0.0, this.metadata.name, true);
         const icon = new St.Icon({
             style_class: "system-status-icon"
         });
